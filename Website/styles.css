@@ -60,18 +60,22 @@ body {
 }
 
 .content-title {
-    font-size: 2em; /* Adjust the size for the title */
+    font-size: 2.25em; /* Adjust the size for the title */
     margin-top: 0; /* Remove default margin */
 }
 
 .content-text {
-    font-size: 1em; /* Adjust the size for the content text */
+    font-size: 1.5em; /* Adjust the size for the content text */
     margin-bottom: 20px; /* Spacing between paragraphs */
 }
 
 .famous-animes {
-    padding: 20px;
+    padding: 60px;
     text-align: center;
+}
+
+.famous-animes h2 {
+    font-size: 3.5em;
 }
 
 .anime {
@@ -87,13 +91,15 @@ body {
 }
 
 .anime h3 {
-    font-size: 24px; /* Adjust the size as needed */
+    font-size: 32px; /* Adjust the size as needed */
     font-weight: bold;
     margin: 10px 0; /* Spacing above and below the title */
 }
 
 .anime p {
-    font-size: 16px; /* Adjust the size as needed */
-    margin-bottom: 10px; /* Spacing below the description */
+    font-size: 22px;  /* Adjust the size as needed */
+    max-width: 1000px;  /* Limit the width to 600px or any value you prefer */
+    margin: 0 auto 10px;  /* Centers the text block and adds spacing below */
+    text-align: center;  /* Align the text to the left within the constrained width */
 }
 
