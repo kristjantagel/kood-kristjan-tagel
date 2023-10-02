@@ -46,7 +46,7 @@ body {
 }
 
 .rounded-textbox {
-    width: 80%; /* Adjust width based on your requirement */
+    width: 80%; /* Adjust width*/
     padding: 20px; /* Add padding for better spacing */
     border-radius: 15px; /* Rounded corners */
     border: 5px solid black;
@@ -82,7 +82,7 @@ body {
 }
 
 .anime img {
-    width: 1000px; /* Adjust as needed */
+    width: 1000px;
     height: auto;
     display: block; /* Make the image a block element */
     margin: 0 auto 20px; /* Centers the image and adds space between the image and the text */
@@ -119,12 +119,12 @@ video {
 }
 
 .video-container h4 {
-    font-size: 24px; /* Adjust as needed */
+    font-size: 24px;
     margin-top: 10px; /* Space between video and title */
 }
 footer {
-    color: black; /* Black border around the footer */
-    text-align: center; /* Center the text */
+    color: black;
+    text-align: center;
     padding: 10px; /* Some space around the text */
     margin-top: 20px; /* Space above the footer, separating it from previous content */
     font-size: 20px; /* Adjust as needed */
