@@ -122,3 +122,10 @@ video {
     font-size: 24px; /* Adjust as needed */
     margin-top: 10px; /* Space between video and title */
 }
+footer {
+    color: black; /* Black border around the footer */
+    text-align: center; /* Center the text */
+    padding: 10px; /* Some space around the text */
+    margin-top: 20px; /* Space above the footer, separating it from previous content */
+    font-size: 20px; /* Adjust as needed */
+}
