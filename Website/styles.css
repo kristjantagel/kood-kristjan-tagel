@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(255, 255, 204);
+}
+
+.site-header {
+    background-image: url('images/Header background img.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh; /* This ensures the image covers the full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Relative positioning */
+    z-index: 1; /* Place the header above the content */
+}
+
+.site-header h1 {
+    background-image: url('images/Textbox-header.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: rgb(0, 0, 0);
+    padding: 280px;
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+    font-size: 3em;
+    font-weight: 700;
+}
+.site-header h1 {
+    padding-top: 250px;  /* Reduce the top padding */
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Full width */
+    position: relative; /* Relative positioning */
+    z-index: 2; /* Place the content above the header */
+    background-color: #fff; /* Set a background color to ensure content is readable */
+    background-color: rgb(255, 255, 204);
+}
+
+.rounded-textbox {
+    width: 80%; /* Adjust width based on your requirement */
+    padding: 20px; /* Add padding for better spacing */
+    border-radius: 15px; /* Rounded corners */
+    border: 5px solid black;
+    text-align: center; /* Centering text */
+    background-color: #fff; /* Giving a background color for better readability */
+}
+
+.rounded-textbox {
+    margin-top: 50px;
+}
+
+.content-title {
+    font-size: 2em; /* Adjust the size for the title */
+    margin-top: 0; /* Remove default margin */
+}
+
+.content-text {
+    font-size: 1em; /* Adjust the size for the content text */
+    margin-bottom: 20px; /* Spacing between paragraphs */
+}
+
+.famous-animes {
+    padding: 20px;
+    text-align: center;
+}
+
+.anime {
+    text-align: center; /* Center the content */
+    margin-bottom: 40px; /* Adjust the space between each anime entry */
+}
+
+.anime img {
+    width: 1000px; /* Adjust as needed */
+    height: auto;
+    display: block; /* Make the image a block element */
+    margin: 0 auto 20px; /* Centers the image and adds space between the image and the text */
+}
+
+.anime h3 {
+    font-size: 24px; /* Adjust the size as needed */
+    font-weight: bold;
+    margin: 10px 0; /* Spacing above and below the title */
+}
+
+.anime p {
+    font-size: 16px; /* Adjust the size as needed */
+    margin-bottom: 10px; /* Spacing below the description */
+}
+
