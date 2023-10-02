@@ -112,13 +112,13 @@ body {
 }
 
 video {
-    width: 200px; /* Set a fixed width for the videos, adjust as needed */
+    width: 480px; /* Set a fixed width for the videos, adjust as needed */
     height: auto; /* Maintain the video's aspect ratio */
     display: block; /* Display as block to remove any bottom space */
     margin: 0 auto; /* Center the video within the container */
 }
 
 .video-container h4 {
-    font-size: 18px; /* Adjust as needed */
+    font-size: 24px; /* Adjust as needed */
     margin-top: 10px; /* Space between video and title */
 }
