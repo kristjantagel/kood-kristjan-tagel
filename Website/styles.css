@@ -42,7 +42,6 @@ body {
     width: 100%; /* Full width */
     position: relative; /* Relative positioning */
     z-index: 2; /* Place the content above the header */
-    background-color: #fff; /* Set a background color to ensure content is readable */
     background-color: rgb(255, 255, 204);
 }
 
@@ -70,7 +69,6 @@ body {
 }
 
 .famous-animes {
-    padding: 60px;
     text-align: center;
 }
 
@@ -91,15 +89,36 @@ body {
 }
 
 .anime h3 {
-    font-size: 32px; /* Adjust the size as needed */
+    font-size: 32px;
     font-weight: bold;
     margin: 10px 0; /* Spacing above and below the title */
 }
 
 .anime p {
-    font-size: 22px;  /* Adjust the size as needed */
-    max-width: 1000px;  /* Limit the width to 600px or any value you prefer */
+    font-size: 22px;
+    max-width: 1000px;
     margin: 0 auto 10px;  /* Centers the text block and adds spacing below */
-    text-align: center;  /* Align the text to the left within the constrained width */
+    text-align: center;  /* Align the text within the constrained width */
 }
 
+.video-gallery {
+    text-align: center; /* Center the content */
+    padding: 20px; /* Some spacing around the gallery */
+}
+
+.video-container {
+    display: inline-block; /* Allows multiple video containers to sit side by side */
+    margin: 10px; /* Spacing around each video container */
+}
+
+video {
+    width: 200px; /* Set a fixed width for the videos, adjust as needed */
+    height: auto; /* Maintain the video's aspect ratio */
+    display: block; /* Display as block to remove any bottom space */
+    margin: 0 auto; /* Center the video within the container */
+}
+
+.video-container h4 {
+    font-size: 18px; /* Adjust as needed */
+    margin-top: 10px; /* Space between video and title */
+}
