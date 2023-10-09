@@ -1,9 +1,43 @@
+/* styles.css */
+
+/* General body styling */
+body {
+    background-color: #f8f8f8; /* Light grey background color for the page */
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Container styling for grid layout */
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 2;
-    display: flex;
-    justify-content: space-around;
-    flex: 1;
-    font-size: 24px;
+    grid-template-columns: repeat(3, 1fr); /* Creating three equal columns */
+    grid-gap: 10px; /* Spacing between grid items */
+    background-color: white; /* Container background color */
+    padding: 20px; /* Padding around the grid items */
+    border-radius: 8px; /* Optional: for rounded corners of the container */
+}
+
+/* Box styling using Flexbox */
+.box {
+    display: flex; /* Using flexbox for grid items */
+    justify-content: center; /* Horizontally centering content */
+    align-items: center; /* Vertically centering content */
+    padding: 20px; /* Padding inside grid items */
+    height: 100px; /* Setting a fixed height for boxes */
+}
+
+/* Styling for odd and even box items */
+.box:nth-child(odd) {
+    background-color: #e74c3c; /* Red color for odd items */
+    color: white;
+    font-family: 'Monotype Corsiva', cursive;
+}
+
+.box:nth-child(even) {
+    background-color: #3498db; /* Blue color for even items */
+    color: white;
 }
