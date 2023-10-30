@@ -93,7 +93,7 @@ function harjutus13(massiiv) {
     }
 }
 
-harjutus13(Marekakshdaksjhdasghdaowiha);
+harjutus13();
 
 let inimesed = [
     {
