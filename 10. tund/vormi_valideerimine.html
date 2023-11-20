@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="myForm">
+        <input type="text" id="username" placeholder="Username"><br>
+        <input type="email" id="email" placeholder="Email"><br>
+        <input type="password" id="password" placeholder="Password"><br>
+        <input type="re_password" id="re_password" placeholder="Retype Password"><br>
+        <button type="button" onclick="validateForm(), validatePassword(), validateEmail(), validateUsername()">Submit</button>
+    </form>
+    
+    <script>
+    function validateForm() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const email = document.getElementById("email").value;
+        const re_password = document.getElementById("re_password").value;
+        const minLength = 8;
+        const minLength1 = 5;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (username === '' || password === '' || email === '' || re_password === '') {
+            alert('Please fill in all fields');
+        } else {
+            // Jätka vormi edasi töötlemisega
+            console.log('Form submitted successfully');
+        }
+
+        if (password.length < minLength) {
+        alert('Password should be at least 8 characters long');
+        } else {
+        console.log('Password meets length requirement');
+        }
+
+        if (username.length < minLength1) {
+            alert('Username should be at least 5 characters long');
+        } else {
+            console.log('Password meets length requirement');
+        }
+
+        if (!email.match(emailPattern)) {
+        alert('Please enter a valid email address');
+        } else {
+        console.log('Valid email address');
+        }
+
+        if (password != re_password) {
+            alert('Passwords need to match!');
+        }
+    }
+    </script>
+
+</body>
+</html>
