@@ -6,15 +6,15 @@ const port = 3002;
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/about', (req, res) => {
-    res.sendFile(__dirname + '/public/about.html');
+    res.sendFile(__dirname + '/about.html');
 });
 
 app.get('/contact', (req, res) => {
-    res.sendFile(__dirname + '/views/contact.html');
+    res.sendFile(__dirname + '/contact.html');
 });
 
 app.listen(port, () => {
