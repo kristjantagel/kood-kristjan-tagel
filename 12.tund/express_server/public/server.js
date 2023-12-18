@@ -13,6 +13,10 @@ app.get('/about', (req, res) => {
     res.sendFile(__dirname + '/public/about.html');
 });
 
+app.get('/contact', (req, res) => {
+    res.sendFile(__dirname + '/views/contact.html');
+});
+
 app.listen(port, () => {
     console.log(`Server kuulab pordil ${port}. Külasta http://localhost:${port}`)
 });
