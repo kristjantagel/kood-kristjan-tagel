@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login and Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>User Login</h2>
+        <form action="/login" method="post" onsubmit="return validateLogin()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <h2>User Registration</h2>
+        <form action="/register" method="post" onsubmit="return validateRegistration()">
+            <label for="regUsername">Username:</label>
+            <input type="text" id="regUsername" name="username" required>
+
+            <label for="regPassword">Password:</label>
+            <input type="password" id="regPassword" name="password" required>
+
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+    
+            if (!username || !password) {
+                alert('Both username and password are required.');
+                return false;
+            }
+    
+            return true;
+        }
+    
+        function validateRegistration() {
+            const regUsername = document.getElementById('regUsername').value;
+            const regPassword = document.getElementById('regPassword').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const age = document.getElementById('age').value;
+            const gender = document.getElementById('gender').value;
+    
+            if (!regUsername || !regPassword || !firstName || !lastName || !age || !gender) {
+                alert('All fields are required.');
+                return false;
+            }
+    
+            return true;
+        }
+    </script>
+</body>
+</html>
