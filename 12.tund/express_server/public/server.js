@@ -55,7 +55,7 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/profile', requireAuth, (req, res) => {
-    ('profile', { req });
+    res.render('profile', { req });
 });
 
 app.get('/logout', (req, res) => {
