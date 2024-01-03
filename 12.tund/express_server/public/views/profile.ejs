@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <div class="container">
+        <h2>User Profile</h2>
+        <section class="user-info">
+            <div class="avatar-container">
+                <!-- Display the user's avatar dynamically (assuming it's stored in req.session.user.avatar) -->
+                <img src="<%= req.session.user.avatar %>" alt="User Avatar">
+            </div>
+            <div class="details-container">
+                <!-- Display user details dynamically -->
+                <p><strong>Username:</strong> <%= req.session.user.username %></p>
+                <p><strong>Name:</strong> <%= req.session.user.firstName %> <%= req.session.user.lastName %></p>
+                <p><strong>Age:</strong> <%= req.session.user.age %></p>
+                <p><strong>Gender:</strong> <%= req.session.user.gender %></p>
+            </div>
+        </section>
+        <section class="user-feedback">
+            <h2>Feedback</h2>
+            <!-- Add a form for user feedback -->
+            <form action="/submit-feedback" method="post">
+                <label for="feedback">Leave your feedback:</label>
+                <textarea id="feedback" name="feedback" rows="4" required></textarea>
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </section>
+        <footer>
+            <!-- Add a logout link -->
+            <a href="/logout">Logout</a>
+        </footer>
+    </div>
+</body>
+</html>

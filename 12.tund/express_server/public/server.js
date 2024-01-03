@@ -2,13 +2,38 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+const mongoose = require('mongoose');
+
 const app = express();
-const users = [];
 const port = 3002;
+app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: true }));
+
+mongoose.connect('mongodb+srv://kristjantagel:x9HVAk6a0INY9pK3@tpl0.vrmdnol.mongodb.net/?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+    console.log('Connected to the database');
+});
+
+const userSchema = new mongoose.Schema({
+    username: String,
+    password: String,
+    firstName: String,
+    lastName: String,
+    age: Number,
+    gender: String
+});
+
+const User = mongoose.model('User', userSchema);
 
 const requireAuth = (req, res, next) => {
     if (!req.session.user) {
@@ -30,7 +55,7 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/profile', requireAuth, (req, res) => {
-    res.send(`Welcome, ${req.session.user.username}!`);
+    ('profile', { req });
 });
 
 app.get('/logout', (req, res) => {
@@ -47,29 +72,39 @@ app.get('/contact', (req, res) => {
 });
 
 app.post('/register', async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, firstName, lastName, age, gender } = req.body;
 
-    if (!username || !password) {
-        return res.status(400).send('Both username and password are required');
+    if (!username || !password || !firstName || !lastName || !age || !gender) {
+        return res.status(400).send('All fields are required');
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    users.push({ username, password: hashedPassword });
-
-    res.redirect('/login');
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = new User({ username, password: hashedPassword, firstName, lastName, age, gender });
+        await newUser.save();
+        res.redirect('/login');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error during registration');
+    }
 });
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
-    const user = users.find((user) => user.username === username);
+    try {
+        const user = await User.findOne({ username: username });
 
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-        return res.status(401).send('Invalid username or password');
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(401).send('Invalid username or password');
+        }
+
+        req.session.user = user;
+        res.redirect('/profile');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error during login');
     }
-
-    req.session.user = user;
-    res.redirect('/profile');
 });
 
 app.listen(port, () => {
