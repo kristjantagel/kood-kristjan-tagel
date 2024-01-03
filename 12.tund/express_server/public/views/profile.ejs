@@ -1,21 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="profile.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar-container {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .details-container {
+            flex: 1;
+        }
+
+        .details-container p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .user-feedback {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
         <h2>User Profile</h2>
         <section class="user-info">
             <div class="avatar-container">
-                <!-- Display the user's avatar dynamically (assuming it's stored in req.session.user.avatar) -->
                 <img src="<%= req.session.user.avatar %>" alt="User Avatar">
             </div>
             <div class="details-container">
-                <!-- Display user details dynamically -->
                 <p><strong>Username:</strong> <%= req.session.user.username %></p>
                 <p><strong>Name:</strong> <%= req.session.user.firstName %> <%= req.session.user.lastName %></p>
                 <p><strong>Age:</strong> <%= req.session.user.age %></p>
@@ -24,7 +116,16 @@
         </section>
         <section class="user-feedback">
             <h2>Feedback</h2>
-            <!-- Add a form for user feedback -->
+            <% if (req.session.user.feedback && req.session.user.feedback.length > 0) { %>
+                <ul>
+                    <% req.session.user.feedback.forEach(feedback => { %>
+                        <li><%= feedback.message %></li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <p>No feedback yet.</p>
+            <% } %>
+
             <form action="/submit-feedback" method="post">
                 <label for="feedback">Leave your feedback:</label>
                 <textarea id="feedback" name="feedback" rows="4" required></textarea>
@@ -32,9 +133,12 @@
             </form>
         </section>
         <footer>
-            <!-- Add a logout link -->
+            <a href="/">Home</a>
+            <a href="/contact">Contact</a>
+            <a href="/about">About</a>
             <a href="/logout">Logout</a>
         </footer>
     </div>
 </body>
+
 </html>

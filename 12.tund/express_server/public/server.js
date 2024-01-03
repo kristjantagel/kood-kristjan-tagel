@@ -30,7 +30,9 @@ const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     age: Number,
-    gender: String
+    gender: String,
+    avatar: String,
+    feedback: [{ message: String, timestamp: { type: Date, default: Date.now } }]
 });
 
 const User = mongoose.model('User', userSchema);
@@ -80,7 +82,19 @@ app.post('/register', async (req, res) => {
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ username, password: hashedPassword, firstName, lastName, age, gender });
+        
+        const defaultAvatar = 'https://storage.googleapis.com/pai-images/241a68765f2049eba217df96ca6f7a7b.jpeg';
+
+        const newUser = new User({
+            username,
+            password: hashedPassword,
+            firstName,
+            lastName,
+            age,
+            gender,
+            avatar: defaultAvatar
+        });
+
         await newUser.save();
         res.redirect('/login');
     } catch (error) {
@@ -88,6 +102,7 @@ app.post('/register', async (req, res) => {
         res.status(500).send('Error during registration');
     }
 });
+
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -106,6 +121,36 @@ app.post('/login', async (req, res) => {
         res.status(500).send('Error during login');
     }
 });
+
+app.post('/submit-feedback', requireAuth, async (req, res) => {
+    const { feedback } = req.body;
+
+    if (!feedback) {
+        return res.status(400).send('Feedback message is required');
+    }
+
+    try {
+        const userId = req.session.user._id;
+
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        user.feedback.push({ message: feedback });
+
+        await user.save();
+
+        req.session.user = user;
+
+        res.redirect('/profile');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error submitting feedback');
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Server kuulab pordil ${port}. Külasta http://localhost:${port}`);
