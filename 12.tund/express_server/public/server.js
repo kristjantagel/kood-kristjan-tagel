@@ -45,15 +45,15 @@ const requireAuth = (req, res, next) => {
 };
 
 app.get('/', (req, res) => {
-    res.redirect('/login');
+    if (req.session.user) {
+        res.render('home', { req });
+    } else {
+        res.redirect('/login');
+    }
 });
 
 app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/login.html');
-});
-
-app.get('/register', (req, res) => {
-    res.sendFile(__dirname + '/register.html');
 });
 
 app.get('/profile', requireAuth, (req, res) => {
@@ -66,11 +66,32 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-    res.sendFile(__dirname + '/about.html');
+    res.render('about', { req });
 });
 
 app.get('/contact', (req, res) => {
-    res.sendFile(__dirname + '/contact.html');
+    res.render('contact', { req });
+});
+
+app.get('/home', requireAuth, (req, res) => {
+    // Add logic to render your home page
+    res.render('home', { req });
+});
+
+app.get('/aot', (req, res) => {
+    res.redirect('https://www.crunchyroll.com/series/GR751KNZY/attack-on-titan');
+});
+
+app.get('/dbz', (req, res) => {
+    res.redirect('https://www.crunchyroll.com/series/G9VHN9PPW/dragon-ball-z');
+});
+
+app.get('/naruto', (req, res) => {
+    res.redirect('https://www.crunchyroll.com/series/GY9PJ5KWR/naruto');
+});
+
+app.get('/onepiece', (req, res) => {
+    res.redirect('https://www.crunchyroll.com/series/GRMG8ZQZR/one-piece');
 });
 
 app.post('/register', async (req, res) => {
@@ -82,7 +103,7 @@ app.post('/register', async (req, res) => {
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        
+
         const defaultAvatar = 'https://storage.googleapis.com/pai-images/241a68765f2049eba217df96ca6f7a7b.jpeg';
 
         const newUser = new User({
@@ -103,7 +124,6 @@ app.post('/register', async (req, res) => {
     }
 });
 
-
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
@@ -115,7 +135,7 @@ app.post('/login', async (req, res) => {
         }
 
         req.session.user = user;
-        res.redirect('/profile');
+        res.redirect('/profile'); // Redirect to profile page after successful login
     } catch (error) {
         console.error(error);
         res.status(500).send('Error during login');
@@ -151,7 +171,6 @@ app.post('/submit-feedback', requireAuth, async (req, res) => {
     }
 });
 
-
 app.listen(port, () => {
-    console.log(`Server kuulab pordil ${port}. Külasta http://localhost:${port}`);
+    console.log(`Server is listening on port ${port}. Visit http://localhost:${port}`);
 });

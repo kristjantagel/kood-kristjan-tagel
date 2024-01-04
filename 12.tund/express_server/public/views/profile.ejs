@@ -22,8 +22,30 @@
             border-radius: 10px;
         }
 
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
         h2 {
             color: #333;
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
         }
 
         .user-info {
@@ -102,7 +124,14 @@
 
 <body>
     <div class="container">
-        <h2>User Profile</h2>
+        <header>
+            <h2>User Profile</h2>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/contact">Contact</a>
+                <a href="/about">About</a>
+            </nav>
+        </header>
         <section class="user-info">
             <div class="avatar-container">
                 <img src="<%= req.session.user.avatar %>" alt="User Avatar">
@@ -133,9 +162,6 @@
             </form>
         </section>
         <footer>
-            <a href="/">Home</a>
-            <a href="/contact">Contact</a>
-            <a href="/about">About</a>
             <a href="/logout">Logout</a>
         </footer>
     </div>

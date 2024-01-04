@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epic Anime Adventures: Unveiling the Legends</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            padding: 10px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .avatar-container {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-left: 20px;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        h3 {
+            color: #007bff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .anime-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .quote-content {
+            margin-top: 30px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #QuoteResult {
+            margin-top: 15px;
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <body>
+        <header>
+            <div class="header-content">
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="/about">About</a>
+                    <a href="/contact">Contact</a>
+                </nav>
+                <a href="/profile" class="avatar-container">
+                    <img src="<%= req.session.user.avatar %>" alt="User Avatar">
+                </a>
+            </div>
+        </header>
+    <div class="container">
+        <h2>Epic Anime Adventures: Unveiling the Legends</h2>
+        <p>Welcome to the mesmerizing world of anime, where vibrant characters, intricate storytelling, and breathtaking animation collide to create unforgettable experiences. Dive into the realms of some of the most iconic anime series that have captured the hearts of millions worldwide. Here, we explore the timeless classics and the modern masterpieces, with a spotlight on four anime giants: Attack on Titan (AOT), Dragon Ball Z (DBZ), Naruto, and One Piece.</p>
+
+        <h3>Attack on Titan (AOT)</h3>
+        <img class="anime-image" src="https://i.imgur.com/K4BN7Gu.jpg" alt="Attack on Titan">
+        <p><strong>Synopsis:</strong> Prepare to be gripped by the intense narrative of "Attack on Titan," a dark fantasy anime that thrusts humanity into a fight for survival against colossal humanoid creatures known as Titans. With its intricate plot twists, complex characters, and jaw-dropping animation, AOT has become a global phenomenon, showcasing the brilliance of anime storytelling.</p>
+        <ul>
+            <li><strong>Why It's a Must-Watch:</strong></li>
+            <ul>
+                <li>Unpredictable Plot Twists</li>
+                <li>Intense Action Sequences</li>
+                <li>Thought-Provoking Themes</li>
+            </ul>
+            <li><strong>Where to Watch:</strong></li>
+            <ul>
+                <li><a href="/aot" target="_blank">Crunchyroll</a></li>
+            </ul>
+        </ul>
+
+        <h3>Dragon Ball Z (DBZ)</h3>
+        <img class="anime-image" src="https://i.imgur.com/4FsdjnP.jpg" alt="Dragon Ball Z">
+        <p><strong>Synopsis:</strong> Embark on a journey with Goku and his friends as they defend Earth against powerful foes, unleashing explosive battles and pushing the limits of their strength. "Dragon Ball Z" is a legendary anime that has left an indelible mark on pop culture, blending epic fights with moments of humor and camaraderie.</p>
+        <ul>
+            <li><strong>Why It's a Must-Watch:</strong></li>
+            <ul>
+                <li>Iconic Transformations</li>
+                <li>Memorable Characters</li>
+                <li>Legacy in Pop Culture</li>
+            </ul>
+            <li><strong>Where to Watch:</strong></li>
+            <ul>
+                <li><a href="/dbz" target="_blank">Crunchyroll</a></li>
+            </ul>
+        </ul>
+
+        <h3>Naruto</h3>
+        <img class="anime-image" src="https://i.imgur.com/5VoLVwd.jpg" alt="Naruto">
+        <p><strong>Synopsis:</strong> Join Naruto Uzumaki on his quest to become the Hokage, the strongest ninja in his village. "Naruto" weaves a tale of friendship, perseverance, and self-discovery, captivating audiences with its engaging characters and emotionally resonant storytelling.</p>
+        <ul>
+            <li><strong>Why It's a Must-Watch:</strong></li>
+            <ul>
+                <li>Inspirational Journey</li>
+                <li>Diverse Characters</li>
+                <li>Legendary Ninja Battles</li>
+            </ul>
+            <li><strong>Where to Watch:</strong></li>
+            <ul>
+                <li><a href="/naruto" target="_blank">Crunchyroll</a></li>
+            </ul>
+        </ul>
+
+        <h3>One Piece</h3>
+        <img class="anime-image" src="https://i.imgur.com/Uahjaep.jpg" alt="One Piece">
+        <p><strong>Synopsis:</strong> Set sail with Monkey D. Luffy and his crew in the quest for the legendary treasure, One Piece. This anime is a grand adventure, combining humor, emotion, and epic battles across a vast and imaginative world. "One Piece" has become a cornerstone of the anime landscape, boasting an extensive lore and an ever-expanding universe.</p>
+        <ul>
+            <li><strong>Why It's a Must-Watch:</strong></li>
+            <ul>
+                <li>World-Building Excellence</li>
+                <li>Endearing Characters</li>
+                <li>Endless Adventure</li>
+            </ul>
+            <li><strong>Where to Watch:</strong></li>
+            <ul>
+                <li><a href="/onepiece" target="_blank">Crunchyroll</a></li>
+            </ul>
+        </ul>
+
+        <h3>Conclusion:</h3>
+        <p>These anime juggernauts represent the pinnacle of storytelling and animation in the anime world. Whether you're a seasoned otaku or a newcomer to the genre, these series promise an unforgettable journey filled with action, emotion, and unparalleled entertainment. Pick your favorite, start watching, and let the anime magic unfold!</p>
+    
+        <div class="quote-content">
+            <h3>Some random anime quotes:</h3>
+            <button onclick="getQuote()">Click here to get a random quote</button>
+        
+            <div id="QuoteResult"></div>
+
+            <script>
+                function getQuote() {
+                    const url = 'https://animechan.xyz/api/random';
+            
+                    fetch(url)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('API Response:', data);
+            
+                            if (data.quote) {
+                                displayQuote(data);
+                            } else {
+                                throw new Error('Invalid data structure or missing quote property');
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                }
+            
+                function displayQuote(data) {
+                    const quoteResult = document.getElementById('QuoteResult');
+                    quoteResult.innerHTML = `
+                        <p><strong>Anime:</strong> ${data.anime}</p>
+                        <p><strong>Character:</strong> ${data.character}</p>
+                        <p><strong>Quote:</strong> ${data.quote}</p>`;
+                }
+            </script>
+        </div>
+</body>
+</html>

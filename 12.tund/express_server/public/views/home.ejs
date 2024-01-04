@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            padding: 10px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .avatar-container {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-left: 20px;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <nav>
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+            </nav>
+            <a href="/profile" class="avatar-container">
+                <img src="<%= req.session.user.avatar %>" alt="User Avatar">
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Explore the World of Anime</h1>
+
+        <p>Anime, a distinctive style of animation that originated in Japan, has captured the hearts of audiences worldwide. Known for its vibrant characters, compelling storytelling, and unique artistry, anime offers a diverse range of genres and themes.</p>
+
+        <h3>Key Facts about Anime:</h3>
+        <ul>
+            <li>Anime encompasses various genres, including action, romance, fantasy, science fiction, and slice of life.</li>
+            <li>Japan is the birthplace of anime, with its origins dating back to the early 20th century.</li>
+            <li>Hayao Miyazaki, co-founder of Studio Ghibli, is renowned for creating critically acclaimed anime films like "Spirited Away" and "My Neighbor Totoro."</li>
+            <li>"Astro Boy" (Tetsuwan Atom), created by Osamu Tezuka, is considered one of the first anime series, premiering in 1963.</li>
+            <li>Anime conventions, such as Comiket in Tokyo, attract thousands of fans, showcasing cosplay, merchandise, and exclusive previews.</li>
+        </ul>
+
+        <p>Explore the captivating world of anime, where imagination knows no bounds and storytelling reaches new heights. Whether you're a seasoned otaku or a newcomer, there's an anime waiting to enchant you.</p>
+        <p>For some interesting animes to watch head to the about page</p>
+    </div>
+
+</body>
+
+</html>
