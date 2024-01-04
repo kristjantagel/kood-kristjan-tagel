@@ -92,7 +92,7 @@
             <input type="text" id="lastName" name="lastName" required>
 
             <label for="age">Age:</label>
-            <input type="number" id="age" name="age" required>
+            <input type="number" id="age" name="age" required min="0">
 
             <label for="gender">Gender:</label>
             <select id="gender" name="gender" required>
@@ -125,12 +125,17 @@
             const age = document.getElementById('age').value;
             const gender = document.getElementById('gender').value;
 
-            if (!regUsername || !regPassword || !firstName || !lastName || !age || !gender) {
-                alert('All fields are required.');
+            if (!regUsername || !validatePassword(regPassword) || !firstName || !lastName || !age || !gender) {
+                alert('Password must be at least 8 characters long and include one number and one uppercase letter.');
                 return false;
             }
 
             return true;
+        }
+
+        function validatePassword(password) {
+            const passwordRegex = /^(?=.*[0-9])(?=.*[A-Z]).{8,}$/;
+            return passwordRegex.test(password);
         }
     </script>
 </body>

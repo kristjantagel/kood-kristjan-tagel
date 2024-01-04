@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/login.html');
+    res.render('login', { req });
 });
 
 app.get('/profile', requireAuth, (req, res) => {
@@ -74,7 +74,6 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/home', requireAuth, (req, res) => {
-    // Add logic to render your home page
     res.render('home', { req });
 });
 
@@ -102,6 +101,11 @@ app.post('/register', async (req, res) => {
     }
 
     try {
+        const passwordRegex = /^(?=.*[0-9])(?=.*[A-Z]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+            return res.status(400).send('Password must be at least 8 characters long and include one number and one uppercase letter');
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const defaultAvatar = 'https://storage.googleapis.com/pai-images/241a68765f2049eba217df96ca6f7a7b.jpeg';
@@ -124,23 +128,33 @@ app.post('/register', async (req, res) => {
     }
 });
 
+
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
         const user = await User.findOne({ username: username });
 
-        if (!user || !(await bcrypt.compare(password, user.password))) {
+        if (!user) {
+            console.log('User not found');
+            return res.status(401).send('Invalid username or password');
+        }
+
+        const passwordMatch = await bcrypt.compare(password, user.password);
+
+        if (!passwordMatch) {
+            console.log('Password does not match');
             return res.status(401).send('Invalid username or password');
         }
 
         req.session.user = user;
-        res.redirect('/profile'); // Redirect to profile page after successful login
+        res.redirect('/profile');
     } catch (error) {
         console.error(error);
         res.status(500).send('Error during login');
     }
 });
+
 
 app.post('/submit-feedback', requireAuth, async (req, res) => {
     const { feedback } = req.body;
