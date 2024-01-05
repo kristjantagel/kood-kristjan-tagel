@@ -10,6 +10,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: true }));
 
 mongoose.connect('mongodb+srv://kristjantagel:x9HVAk6a0INY9pK3@tpl0.vrmdnol.mongodb.net/?retryWrites=true&w=majority', {
@@ -93,17 +94,38 @@ app.get('/onepiece', (req, res) => {
     res.redirect('https://www.crunchyroll.com/series/GRMG8ZQZR/one-piece');
 });
 
+app.post('/check-username', async (req, res) => {
+    const { username } = req.body;
+
+    try {
+        const existingUser = await User.findOne({ username: username });
+
+        if (existingUser) {
+            return res.json({ available: false });
+        }
+
+        return res.json({ available: true });
+    } catch (error) {
+        console.error('Error checking username availability:', error);
+        res.status(500).json({ available: false });
+    }
+});
+
 app.post('/register', async (req, res) => {
     const { username, password, firstName, lastName, age, gender } = req.body;
 
-    if (!username || !password || !firstName || !lastName || !age || !gender) {
-        return res.status(400).send('All fields are required');
-    }
-
     try {
-        const passwordRegex = /^(?=.*[0-9])(?=.*[A-Z]).{8,}$/;
-        if (!passwordRegex.test(password)) {
-            return res.status(400).send('Password must be at least 8 characters long and include one number and one uppercase letter');
+        if (!username || !password || !firstName || !lastName || !age || !gender) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+
+        const existingUser = await User.findOne({ username: username });
+        if (existingUser) {
+            return res.status(401).json({ error: 'Username already exists' });
+        }
+
+        if (!validatePassword(password)) {
+            return res.status(402).json({ error: 'Password must be at least 8 characters long and include one number and one uppercase letter' });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -121,37 +143,37 @@ app.post('/register', async (req, res) => {
         });
 
         await newUser.save();
-        res.redirect('/login');
+
+        res.status(201).json({ success: true, message: 'Registration successful' });
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Error during registration');
+        console.error('Error during registration:', error);
+        res.status(500).json({ error: 'Error during registration' });
     }
 });
 
+
+function validatePassword(password) {
+    const passwordRegex = /^(?=.*[0-9])(?=.*[A-Z]).{8,}$/;
+    return passwordRegex.test(password);
+}
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        const user = await User.findOne({ username: username });
-
-        if (!user) {
-            console.log('User not found');
-            return res.status(401).send('Invalid username or password');
-        }
+        const user = await User.findOne({ username: new RegExp('^'+username+'$', 'i') });
 
         const passwordMatch = await bcrypt.compare(password, user.password);
 
-        if (!passwordMatch) {
-            console.log('Password does not match');
-            return res.status(401).send('Invalid username or password');
+        if (passwordMatch) {
+            req.session.user = user;
+            res.redirect('/profile');
+        } else {
+            res.status(401).json({ error: 'Invalid username or password' });
         }
-
-        req.session.user = user;
-        res.redirect('/profile');
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Error during login');
+        console.error("Error during login process:", error);
+        res.status(500).json({ error: 'Error during login' });
     }
 });
 

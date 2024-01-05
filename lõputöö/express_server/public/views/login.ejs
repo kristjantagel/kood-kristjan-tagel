@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login and Registration</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px;
+            background-color: #f44336;
+            color: white;
+            border-radius: 5px;
+            display: none;
+            z-index: 999;
+        }
+    </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                document.getElementById('loginForm').addEventListener('submit', validateLogin);
+                document.getElementById('registrationForm').addEventListener('submit', validateRegistration);
+            });
+    
+            function showNotification(message) {
+                const notificationDiv = document.getElementById('notification');
+                notificationDiv.innerText = message;
+                notificationDiv.style.display = 'block';
+                setTimeout(() => notificationDiv.style.display = 'none', 5000);
+            }
+    
+            function validateLogin(event) {
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value.trim();
+    
+                if (!username || !password) {
+                    showNotification('Both username and password are required.');
+                    event.preventDefault();
+                }
+            }
+    
+            async function validateRegistration(event) {
+                event.preventDefault(); // Prevent the default form submission behavior
+
+                const regUsername = document.getElementById('regUsername').value.trim();
+                const regPassword = document.getElementById('regPassword').value.trim();
+                const firstName = document.getElementById('firstName').value.trim();
+                const lastName = document.getElementById('lastName').value.trim();
+                const age = document.getElementById('age').value.trim();
+                const gender = document.getElementById('gender').value.trim();
+
+                if (!regUsername || !regPassword || !firstName || !lastName || !age || !gender) {
+                    showNotification('All fields are required.');
+                    return;
+                }
+
+                if (!validatePassword(regPassword)) {
+                    showNotification('Password must be at least 8 characters long and include one number and one uppercase letter.');
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: regUsername,
+                            password: regPassword,
+                            firstName,
+                            lastName,
+                            age,
+                            gender,
+                        }),
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        showNotification('Registration successful!');
+                        // Optionally redirect or clear form here
+                    } else {
+                        // Show error message from server response
+                        showNotification(data.error);
+                    }
+                } catch (error) {
+                    console.error('Error during registration:', error);
+                    showNotification('Error during registration. Please try again.');
+                }
+            }
+
+            function validatePassword(password) {
+                const passwordRegex = /^(?=.*[0-9])(?=.*[A-Z]).{8,}$/;
+                return passwordRegex.test(password);
+            }
+        </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>User Login</h2>
+        <form action="/login" method="post" onsubmit="return validateLogin()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <h2>User Registration</h2>
+        <form id="registrationForm" action="/register" method="post" onsubmit="return validateRegistration(event)">
+            <label for="regUsername">Username:</label>
+            <input type="text" id="regUsername" name="username" required>
+
+            <label for="regPassword">Password:</label>
+            <input type="password" id="regPassword" name="password" required>
+
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required min="1">
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <div id="notification"></div>
+
+</body>
+
+</html>
