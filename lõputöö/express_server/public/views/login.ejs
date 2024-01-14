@@ -100,8 +100,8 @@
             }
     
             async function validateRegistration(event) {
-                event.preventDefault(); // Prevent the default form submission behavior
-
+                event.preventDefault();
+                
                 const regUsername = document.getElementById('regUsername').value.trim();
                 const regPassword = document.getElementById('regPassword').value.trim();
                 const firstName = document.getElementById('firstName').value.trim();
@@ -139,9 +139,7 @@
 
                     if (response.ok) {
                         showNotification('Registration successful!');
-                        // Optionally redirect or clear form here
                     } else {
-                        // Show error message from server response
                         showNotification(data.error);
                     }
                 } catch (error) {
